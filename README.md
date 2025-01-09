@@ -2,6 +2,8 @@
 
 A simple URL shortener service powered by Cloudflare Workers and Turso.
 
+![URL Shortener Interface](https://cdn.skiddle.id/images/sharex/2025/01/chrome_KUebIczkgF.png)
+
 ## Features
 
 - Create short URLs with random keys
@@ -9,6 +11,8 @@ A simple URL shortener service powered by Cloudflare Workers and Turso.
 - Authorization required for creating URLs
 - Beautiful UI with dark mode support
 - Redirect to default URL when form is disabled
+- Modern, responsive interface with TailwindCSS
+- ShareX integration support
 
 ## Tech Stack
 
@@ -61,6 +65,35 @@ A simple URL shortener service powered by Cloudflare Workers and Turso.
    npm run deploy
    ```
 
+## ShareX Integration
+
+You can use this URL shortener with ShareX for quick sharing. Create a new custom uploader in ShareX with the following configuration:
+
+```json
+{
+  "Version": "16.1.0",
+  "Name": "Shlink v3 Shortener",
+  "DestinationType": "URLShortener",
+  "RequestMethod": "POST",
+  "RequestURL": "https://skiddle.link/api/links",
+  "Headers": {
+    "Authorization": "mysecret",
+    "Content-Type": "application/json"
+  },
+  "Body": "JSON",
+  "Data": "{\n  \"url\": \"{input}\"\n}",
+  "URL": "{json:shorturl}"
+}
+```
+
+To set up:
+1. Open ShareX
+2. Go to Destinations > Custom Uploader Settings
+3. Click "Import" > "From Clipboard"
+4. Paste the configuration above
+5. Replace `mysecret` with your actual authorization token
+6. Set as default URL shortener in ShareX settings
+
 ## API Usage
 
 ### Create Random Short URL
@@ -104,3 +137,7 @@ Response:
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details
+
+## Credits
+
+Created and maintained by [Laurensius Jeffrey](https://github.com/arcestia)
