@@ -1,0 +1,24 @@
+{
+  "name": "shortlinks",
+  "version": "1.0.0",
+  "description": "Simple link shortener service powered by Turso.",
+  "author": "Laurensius Jeffrey",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "format": "prettier --write '**/*.{ts,js,css,json,md,html}'"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/html": "^1.2.0",
+    "@libsql/client": "^0.14.0",
+    "elysia": "^1.2.0"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  }
+}
