@@ -271,42 +271,43 @@
         <script>
             async function submitForm(event) {
                 event.preventDefault()
-                
+
+                const form = document.getElementById('myForm')
                 const url = document.getElementById('url').value
                 const customPath = document.getElementById('customPath').value
                 const authKey = document.getElementById('authKey').value
 
-                if (!authKey) {
-                    showError('Authorization key is required')
-                    return
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'Authorization': authKey
                 }
 
                 try {
-                    // Use PUT for custom path, POST for random
-                    const method = customPath ? 'PUT' : 'POST'
-                    const endpoint = customPath 
-                        ? `/${encodeURIComponent(customPath)}`
-                        : '/'
-
-                    const response = await fetch(endpoint, {
-                        method,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': authKey
-                        },
-                        body: JSON.stringify({ url })
-                    })
-
-                    const data = await response.json()
-                    
-                    if (!response.ok) {
-                        throw new Error(data.message || 'Failed to create short URL')
+                    let response
+                    if (customPath) {
+                        // Use PUT endpoint for custom path
+                        response = await fetch(`/api/links/${customPath}`, {
+                            method: 'PUT',
+                            headers,
+                            body: JSON.stringify({ url })
+                        })
+                    } else {
+                        // Use POST endpoint for random path
+                        response = await fetch('/api/links', {
+                            method: 'POST',
+                            headers,
+                            body: JSON.stringify({ url })
+                        })
                     }
 
-                    updateUI(data)
+                    const data = await response.json()
+                    if (response.ok) {
+                        updateUI(data)
+                    } else {
+                        showError(data.message)
+                    }
                 } catch (error) {
-                    console.error('Error:', error)
-                    showError(error.message)
+                    showError('Failed to create short URL: ' + error.message)
                 }
             }
 
