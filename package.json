@@ -6,19 +6,18 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"dev": "bun run --watch src/index.ts",
-		"start": "bun run src/index.ts",
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy",
 		"format": "prettier --write '**/*.{ts,js,css,json,md,html}'"
 	},
 	"dependencies": {
-		"@elysiajs/cors": "^1.2.0",
-		"@elysiajs/html": "^1.2.0",
 		"@libsql/client": "^0.14.0",
-		"elysia": "^1.2.0"
+		"hono": "^3.11.11"
 	},
 	"devDependencies": {
-		"bun-types": "latest",
+		"@cloudflare/workers-types": "^4.20231218.0",
 		"prettier": "^3.2.5",
-		"typescript": "^5.3.3"
+		"typescript": "^5.3.3",
+		"wrangler": "^3.22.1"
 	}
 }

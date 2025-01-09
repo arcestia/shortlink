@@ -10,28 +10,53 @@ node_modules/
 .cargo-ok
 wrangler.prod.toml
 .mf
-.wrangler/
 .idea/
 # Dependencies
+node_modules/
+.pnp
+.pnp.js
 bun.lockb
 
-# Environment
+# Testing
+coverage/
+
+# Production
+dist/
+build/
+.wrangler/
+
+# Environment files
 .env
 .env.local
-.env.*.local
-
-# IDE
-.vscode
+.env.development.local
+.env.test.local
+.env.production.local
+.dev.vars
 
 # Logs
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Build
-build
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# OS
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Cloudflare Workers
+.dev.vars
+.wrangler/
+wrangler.toml
