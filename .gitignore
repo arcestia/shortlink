@@ -59,4 +59,3 @@ Thumbs.db
 # Cloudflare Workers
 .dev.vars
 .wrangler/
-wrangler.toml

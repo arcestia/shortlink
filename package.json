@@ -6,8 +6,9 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev",
-		"deploy": "wrangler deploy",
+		"dev": "wrangler dev src/index.ts",
+		"build": "tsc",
+		"deploy": "wrangler deploy src/index.ts",
 		"format": "prettier --write '**/*.{ts,js,css,json,md,html}'"
 	},
 	"dependencies": {

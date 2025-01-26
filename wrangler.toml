@@ -1,0 +1,22 @@
+name = "shortlink"
+main = "src/index.ts"
+compatibility_date = "2024-01-26"
+
+# Custom domain configuration
+routes = [
+    { pattern = "skiddle.link", custom_domain = true }
+]
+
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENABLE_INDEX_FORM = true
+DEFAULT_URL = "https://skiddle.id"
+
+# Development configuration
+[dev]
+port = 8787
+
+# Production configuration
+[env.production]
+workers_dev = true
