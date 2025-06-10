@@ -23,3 +23,39 @@ jobs:
         CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
         CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       run: npm run deploy
+
+    - name: Notify via Discord (Success)
+      if: success()
+      run: |
+        curl -H "Content-Type: application/json" \
+        -X POST -d '{
+          "embeds": [{
+            "title": "✅ Deployment Successful",
+            "description": "The Deployment to CF Workers Success.",
+            "color": 3066993,
+            "fields": [
+              {"name": "Repository", "value": "${{ github.repository }}", "inline": true},
+              {"name": "Time", "value": "'"$(date +"%Y-%m-%d %H:%M:%S")"'", "inline": true}
+            ],
+            "footer": {"text": "Skiddle Bot | GitHub Actions"}
+          }]
+        }' ${{ secrets.DISCORD_WEBHOOK }}
+      shell: bash
+
+    - name: Notify via Discord (Failure)
+      if: failure()
+      run: |
+        curl -H "Content-Type: application/json" \
+        -X POST -d '{
+          "embeds": [{
+            "title": "❌ Deployment Failed",
+            "description": "An error occurred during the workflow execution.",
+            "color": 15158332,
+            "fields": [
+              {"name": "Repository", "value": "${{ github.repository }}", "inline": true},
+              {"name": "Time", "value": "'"$(date +"%Y-%m-%d %H:%M:%S")"'", "inline": true}
+            ],
+            "footer": {"text": "Skiddle Bot | GitHub Actions"}
+          }]
+        }' ${{ secrets.DISCORD_WEBHOOK }}
+      shell: bash
