@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@libsql/client": "^0.14.0",
-		"hono": "^4.11.10"
+		"hono": "^4.12.4"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20231218.0",
